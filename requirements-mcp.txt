@@ -1,0 +1,2 @@
+# Official MCP Python SDK. The file-workflow CLI remains standard-library only.
+mcp==1.26.0

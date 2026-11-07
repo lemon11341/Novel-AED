@@ -1,0 +1,254 @@
+{
+  "type": "object",
+  "properties": {
+    "premise": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2000
+    },
+    "ending": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2000
+    },
+    "chapters": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "number": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "goal": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "beats": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2000
+            },
+            "maxItems": 8,
+            "minItems": 2
+          },
+          "canon_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2000
+            },
+            "maxItems": 64,
+            "minItems": 1
+          },
+          "thread_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2000
+            },
+            "maxItems": 64
+          },
+          "ending": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "pacing": {
+            "type": "object",
+            "properties": {
+              "pace": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              },
+              "event_density": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              },
+              "story_time": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              },
+              "scene_balance": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              },
+              "tension": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              },
+              "transition": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              }
+            },
+            "required": [
+              "pace",
+              "event_density",
+              "story_time",
+              "scene_balance",
+              "tension",
+              "transition"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "number",
+          "title",
+          "goal",
+          "beats",
+          "canon_ids",
+          "thread_ids",
+          "ending",
+          "pacing"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "unresolved": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 2000
+      },
+      "maxItems": 64
+    },
+    "narrative_assessment": {
+      "type": "object",
+      "properties": {
+        "progress": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "open_arcs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "maxItems": 64
+        },
+        "pacing_baseline": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "recent_pacing": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "continuation_strategy": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "ending_allocation": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "chunk_id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              },
+              "quote": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 400
+              }
+            },
+            "required": [
+              "chunk_id",
+              "quote"
+            ],
+            "additionalProperties": false
+          },
+          "maxItems": 8,
+          "minItems": 1
+        },
+        "uncertainties": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "maxItems": 64
+        }
+      },
+      "required": [
+        "progress",
+        "open_arcs",
+        "pacing_baseline",
+        "recent_pacing",
+        "continuation_strategy",
+        "ending_allocation",
+        "evidence",
+        "uncertainties"
+      ],
+      "additionalProperties": false
+    },
+    "length_spec": {
+      "type": "object",
+      "properties": {
+        "chapters_count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "target_chars": {
+          "type": "integer",
+          "minimum": 100,
+          "maximum": 12000
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        }
+      },
+      "required": [
+        "chapters_count",
+        "target_chars",
+        "rationale"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "premise",
+    "ending",
+    "chapters",
+    "unresolved",
+    "narrative_assessment",
+    "length_spec"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,44 @@
+{
+  "name": "novel-aed",
+  "version": "0.1.1",
+  "description": "A local workflow and MCP interface for agent-assisted novel writing.",
+  "homepage": "https://github.com/lemon11341/Novel-AED#readme",
+  "bugs": "https://github.com/lemon11341/Novel-AED/issues",
+  "keywords": ["novel", "writing", "mcp", "mcp-server", "agent-skills", "ai-agents"],
+  "license": "MIT",
+  "repository": "https://github.com/lemon11341/Novel-AED.git",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "bin": {
+    "novel-aed": "bin/novel-aed.mjs"
+  },
+  "files": [
+    "bin/*.mjs",
+    "scripts/*.py",
+    "workflow/**/*.py",
+    "workflow/*.md",
+    "workflow/schemas/*.json",
+    "skills/novel-aed/SKILL.md",
+    "docs/*.md",
+    "config/*.json",
+    "AGENTS.md",
+    "README.md",
+    "README.ko.md",
+    "README.en.md",
+    "LICENSE",
+    "requirements-mcp.txt"
+  ],
+  "scripts": {
+    "test:node": "node --test tests/distribution.test.mjs",
+    "test:python": "python -m unittest discover -s tests -v",
+    "test": "npm run test:node && npm run test:python",
+    "check:package": "python scripts/verify_package.py",
+    "prepack": "python scripts/verify_package.py --source-only",
+    "package": "node -e \"require('node:fs').mkdirSync('artifacts',{recursive:true})\" && npm pack --pack-destination artifacts"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

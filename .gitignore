@@ -1,0 +1,20 @@
+data/
+__pycache__/
+*.py[cod]
+.env
+.venv/
+node_modules/
+*.tgz
+artifacts/
+*.novel-aed-backup-*
+
+# Machine-specific MCP registrations and generated skill copies (canonical: skills/).
+.codex/config.toml
+.mcp.json
+.cursor/mcp.json
+.agents/skills/novel-aed/
+.claude/skills/novel-aed/
+.cursor/skills/novel-aed/
+
+stories/*
+!stories/.gitkeep

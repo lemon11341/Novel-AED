@@ -1,0 +1,87 @@
+{
+  "type": "object",
+  "properties": {
+    "verdict": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2000,
+      "enum": [
+        "pass",
+        "revise"
+      ]
+    },
+    "issues": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "severity": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000,
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ]
+          },
+          "category": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000,
+            "enum": [
+              "canon",
+              "timeline",
+              "knowledge",
+              "character",
+              "style",
+              "outline",
+              "thread",
+              "pacing",
+              "reference"
+            ]
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "draft_quote": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "canon_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2000
+            },
+            "maxItems": 64
+          }
+        },
+        "required": [
+          "severity",
+          "category",
+          "description",
+          "draft_quote",
+          "canon_ids"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 64
+    },
+    "rationale": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2000
+    }
+  },
+  "required": [
+    "verdict",
+    "issues",
+    "rationale"
+  ],
+  "additionalProperties": false
+}

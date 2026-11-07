@@ -1,0 +1,119 @@
+{
+  "type": "object",
+  "properties": {
+    "summary": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2000
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000,
+            "enum": [
+              "character",
+              "event",
+              "world",
+              "narration",
+              "style",
+              "theme",
+              "thread",
+              "emotion"
+            ]
+          },
+          "subject": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "statement": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "epistemic": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000,
+            "enum": [
+              "explicit",
+              "inferred",
+              "hypothesis"
+            ]
+          },
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "chunk_id": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 2000
+                },
+                "quote": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 400
+                }
+              },
+              "required": [
+                "chunk_id",
+                "quote"
+              ],
+              "additionalProperties": false
+            },
+            "maxItems": 4,
+            "minItems": 1
+          }
+        },
+        "required": [
+          "category",
+          "subject",
+          "statement",
+          "epistemic",
+          "confidence",
+          "evidence"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 48,
+      "minItems": 1
+    },
+    "unknowns": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 2000
+      },
+      "maxItems": 64
+    },
+    "structure_notes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 2000
+      },
+      "maxItems": 64
+    }
+  },
+  "required": [
+    "summary",
+    "claims",
+    "unknowns",
+    "structure_notes"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Test (${{ matrix.os }}, Python ${{ matrix.python-version }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python-version: ['3.11', '3.12']
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install MCP dependencies
+        run: python -m pip install -r requirements-mcp.txt
+
+      - name: Run test suites
+        run: npm test
+
+      - name: Pack npm distribution
+        run: npm run package
+
+      - name: Verify npm distribution
+        run: python scripts/verify_package.py artifacts
+
+      - name: Smoke test packed distribution
+        run: python scripts/smoke_package.py artifacts
+
+      - name: Upload distribution artifact
+        if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.12'
+        uses: actions/upload-artifact@v4
+        with:
+          name: novel-aed-npm-package
+          path: artifacts/*.tgz
+          if-no-files-found: error

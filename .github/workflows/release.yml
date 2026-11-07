@@ -1,0 +1,92 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: Publish the verified package to npm
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build (${{ matrix.os }}, Python ${{ matrix.python-version }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python-version: ['3.11', '3.12']
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install MCP dependencies
+        run: python -m pip install -r requirements-mcp.txt
+
+      - name: Run test suites
+        run: npm test
+
+      - name: Pack npm distribution
+        run: npm run package
+
+      - name: Verify npm distribution
+        run: python scripts/verify_package.py artifacts
+
+      - name: Smoke test packed distribution
+        run: python scripts/smoke_package.py artifacts
+
+      - name: Upload release package
+        if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.12'
+        uses: actions/upload-artifact@v4
+        with:
+          name: novel-aed-npm-package
+          path: artifacts/*.tgz
+          if-no-files-found: error
+
+  publish:
+    if: ${{ inputs.publish }}
+    needs: build
+    runs-on: ubuntu-latest
+    environment: npm-release
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify selected tag matches package version
+        env:
+          RELEASE_REF_TYPE: ${{ github.ref_type }}
+          RELEASE_REF_NAME: ${{ github.ref_name }}
+        run: |
+          node -e 'const pkg = require("./package.json"); const type = process.env.RELEASE_REF_TYPE; const ref = process.env.RELEASE_REF_NAME; if (type !== "tag" || ref !== "v" + pkg.version) { throw new Error(`Expected tag v${pkg.version}; received ${type}:${ref}`); }'
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: novel-aed-npm-package
+          path: artifacts
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+
+      - name: Upgrade npm for trusted publishing
+        run: npm install --global npm@11
+
+      # Before its first publish, manually bootstrap the npm package and configure
+      # this repository/workflow as its trusted publisher (see the release docs).
+      - name: Publish with provenance
+        run: npm publish artifacts/*.tgz --access public --provenance

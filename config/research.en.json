@@ -1,0 +1,56 @@
+[
+  {
+    "id": "labov-waletzky-1967-1997",
+    "title": "Narrative Analysis: Oral Versions of Personal Experience",
+    "authors": ["William Labov", "Joshua Waletzky"],
+    "year": 1967,
+    "url": "https://doi.org/10.1075/jnlh.7.02nar",
+    "application": "For the original work (1967; reprinted in 1997), use orientation, complicating action, evaluation, resolution, and coda as optional categories for analyzing oral personal narratives.",
+    "limitations": "This research concerns the structure of oral personal narratives, so it should not be imposed as a universal narrative template for novels."
+  },
+  {
+    "id": "chambers-jurafsky-2008",
+    "title": "Unsupervised Learning of Narrative Event Chains",
+    "authors": ["Nathanael Chambers", "Dan Jurafsky"],
+    "year": 2008,
+    "url": "https://aclanthology.org/P08-1090/",
+    "application": "Refer to this work when designing analysis that groups events linked to the same character and records partial temporal order between events.",
+    "limitations": "This study examines character and event chains in English news. A shared character or temporal ordering does not establish causality or motivation. Performance on Korean fiction has not been validated."
+  },
+  {
+    "id": "bamman-underwood-smith-2014",
+    "title": "A Bayesian Mixed Effects Model of Literary Character",
+    "authors": ["David Bamman", "Ted Underwood", "Noah A. Smith"],
+    "year": 2014,
+    "url": "https://aclanthology.org/P14-1035/",
+    "application": "Refer to this work when designing character-analysis fields that distinguish agent and patient roles, possession, descriptions of attributes, and author-style effects.",
+    "limitations": "This study models latent character types in a corpus of English novels from 1700–1899. It is not a validated analyzer or character-continuity algorithm for Korean or contemporary serialized fiction."
+  },
+  {
+    "id": "reagan-et-al-2016",
+    "title": "The emotional arcs of stories are dominated by six basic shapes",
+    "authors": ["Andrew J. Reagan", "Lewis Mitchell", "Dilan Kiley", "Christopher M. Danforth", "Peter Sheridan Dodds"],
+    "year": 2016,
+    "url": "https://doi.org/10.1140/epjds/s13688-016-0093-1",
+    "application": "Refer to this work when reviewing a story's emotional trajectory as a continuous diagnostic signal.",
+    "limitations": "The study analyzes emotional arcs in a selected set of 1,327 English novels from Project Gutenberg. Its six shapes are not plot rules that apply to every work."
+  },
+  {
+    "id": "yang-et-al-2022-re3",
+    "title": "Re3: Generating Longer Stories With Recursive Reprompting and Revision",
+    "authors": ["Kevin Yang", "Yuandong Tian", "Nanyun Peng", "Dan Klein"],
+    "year": 2022,
+    "url": "https://aclanthology.org/2022.emnlp-main.296/",
+    "application": "Refer to this workflow for repeatedly providing an outline and current story state, continuing the story in sections, and comparing and revising candidates for consistency and relevance to the premise.",
+    "limitations": "The experiments generate English stories longer than 2,000 words. The same effects are not guaranteed for continuing an interrupted serialized novel or for Korean works."
+  },
+  {
+    "id": "yang-et-al-2023-doc",
+    "title": "DOC: Improving Long Story Coherence With Detailed Outline Control",
+    "authors": ["Kevin Yang", "Dan Klein", "Nanyun Peng", "Yuandong Tian"],
+    "year": 2023,
+    "url": "https://aclanthology.org/2023.acl-long.190/",
+    "application": "Refer to this work for using hierarchical, detailed outlines and scene-level checks to review consistency while continuing a story.",
+    "limitations": "The study was evaluated on generated English stories of several thousand words using its own comparison setup. It does not establish that the method preserves the setting, characters, and multiple plotlines of an existing work, or that it applies to Korean."
+  }
+]
